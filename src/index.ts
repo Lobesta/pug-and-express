@@ -14,7 +14,7 @@ expressApp.set("views", "./templates");
 expressApp.use(sassMiddleware({
 	src: SASS_SRC,
     dest: SASS_DIST,
-    debug: true,
+    // debug: true,
 	outputStyle: 'compressed',
 	prefix: "/static"
 })/*, express.static(path.join(__dirname, "dist-styles"))*/);
