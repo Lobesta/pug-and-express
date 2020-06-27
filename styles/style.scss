@@ -1,0 +1,14 @@
+$color1: skyblue;
+$color2: orange;
+
+.deco-title {
+	border-left: $color1 10px solid;
+	padding-left: 7px;
+	border-bottom: $color1 3px solid;
+}
+
+.deco-text {
+	border: $color2 1px solid;
+	padding: 5px;
+	border-radius: 5px;
+}
