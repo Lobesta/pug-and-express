@@ -1,9 +1,9 @@
 import express from "express";
 import Vue from "vue";
-import { createRenderer } from "vue-server-renderer";
+import * as VueRenderer from "vue-server-renderer";
 
 const server = express();
-const renderer = createRenderer();
+const renderer = VueRenderer.createRenderer();
 
 const PORT_NO = 3000;
 

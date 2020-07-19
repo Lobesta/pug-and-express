@@ -8,7 +8,8 @@ In addition, I may come up with new extensions. It's all unpredictable.
 If you've been tempted to touch Vue.js, or to try a more advanced web applications, this branch could be an option for you.
 
 # What I referred
-[Vue SSR Guide](https://ssr.vuejs.org/ja/guide/)
+[Vue SSR Guide](https://ssr.vuejs.org/ja/guide/)  
+https://github.com/vuejs/vue-hackernews-2.0
 
 # How to
 - clone this
