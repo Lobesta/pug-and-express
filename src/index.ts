@@ -1,30 +1,39 @@
 import express from "express";
-import sassMiddleware from "node-sass-middleware";
-import path from "path";
+import Vue from "vue";
+import { createRenderer } from "vue-server-renderer";
 
-const expressApp = express();
+const server = express();
+const renderer = createRenderer();
 
 const PORT_NO = 3000;
-const SASS_SRC = path.join(__dirname, "../styles");  // In this case __dirname points ./src directory
-const SASS_DIST = path.join(__dirname, "../dist-styles");
 
-expressApp.set("view engine", "pug");
-expressApp.set("views", "./templates");
+const ERR_HTML = `<div>500 Internal Server Error</div>`;
+const wrapInDefaultLayout = (html:string) => {
+	return `
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>Hello</title>
+			<meta charset="utf-8">
+		</head>
+		<body>${html}</body>
+	</html>`;
+}
 
-expressApp.use(sassMiddleware({
-	src: SASS_SRC,
-    dest: SASS_DIST,
-    // debug: true,
-	outputStyle: 'compressed',
-	prefix: "/static"
-})/*, express.static(path.join(__dirname, "dist-styles"))*/);
-expressApp.use(express.static(SASS_DIST));
+server.get("*", (req, res)=>{
+	const app = new Vue({
+		data: {
+			url: req.url
+		},
+		template: `<div>The visited URL is: {{ url }}</div>`
+	});
+	renderer.renderToString(app).then((html)=>{
+		res.end(wrapInDefaultLayout(html));
+	}).catch((_err)=>{
+		res.status(500).end(wrapInDefaultLayout(ERR_HTML));
+	})
+})
 
-// Add routing here when you write a new pug file
-expressApp.get("", (_req, res)=>{
-	res.render("index");
-});
-
-expressApp.listen(PORT_NO);
+server.listen(PORT_NO);
 
 console.log(`Server is ready: access to http://localhost:${PORT_NO} !`);

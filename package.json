@@ -26,6 +26,8 @@
 	"dependencies": {
 		"express": "^4.17.1",
 		"node-sass-middleware": "^0.11.0",
-		"pug": "^3.0.0"
+		"pug": "^3.0.0",
+		"vue": "^2.6.11",
+		"vue-server-renderer": "^2.6.11"
 	}
 }
