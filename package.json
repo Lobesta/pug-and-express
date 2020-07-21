@@ -7,8 +7,9 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "npm-run-all build start",
 		"clean": "rimraf dist/*",
-		"webpack": "webpack",
-		"build": "npm-run-all clean webpack",
+		"webpack:server": "webpack --config webpack.server-bundle.config.js && webpack --config webpack.server.config.js",
+		"webpack:client": "webpack --config webpack.client.config.js",
+		"build": "npm-run-all clean webpack:server webpack:client",
 		"start": "node dist/server.js"
 	},
 	"keywords": [],
@@ -28,9 +29,12 @@
 		"pug": "^3.0.0",
 		"ts-loader": "^8.0.1",
 		"vue": "^2.6.11",
+		"vue-class-component": "^7.2.4",
+		"vue-router": "^3.3.4",
 		"vue-server-renderer": "^2.6.11",
 		"webpack": "^4.43.0",
 		"webpack-cli": "^3.3.12",
+		"webpack-merge": "^5.0.9",
 		"webpack-node-externals": "^2.5.0"
 	}
 }
