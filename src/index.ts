@@ -1,7 +1,7 @@
 import express from "express";
-import Vue from "vue";
 import * as VueRenderer from "vue-server-renderer";
 import fs from "fs";
+import createView from "./vue-app";
 
 const expressApp = express();
 const renderer = VueRenderer.createRenderer(
@@ -9,19 +9,17 @@ const renderer = VueRenderer.createRenderer(
 );
 
 const PORT_NO = 3000;
-const context = {
+const inj = {
 	title: "Hello",
 	metas: `<meta charset="utf-8">`
 }
 
 expressApp.get("*", (req, res)=>{
-	const app = new Vue({
-		data: {
-			url: req.url
-		},
-		template: `<div>The visited URL is: {{ url }}</div>`
-	});
-	renderer.renderToString(app, context).then((html)=>{
+	const context = {
+		url: req.url
+	}
+	const app = createView(context);
+	renderer.renderToString(app, inj).then((html)=>{
 		res.end(html);
 	}).catch((_err)=>{
 		res.status(500).end("500: Internal Server Error");
