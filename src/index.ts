@@ -12,7 +12,7 @@ const IS_DEV = Object.keys(require.cache).some(path => path.includes('/ts-node/'
 const VIEW_EXT = IS_DEV ? "tsx" : "js";
 
 expressApp.set("view engine", VIEW_EXT);
-expressApp.set("views", IS_DEV ? "./src/templates" : "./templates");
+expressApp.set("views", IS_DEV ? "./src/templates" : "./dist/templates");
 expressApp.engine(VIEW_EXT, createEngine());
 
 expressApp.use(sassMiddleware({
