@@ -1,28 +1,32 @@
 import express from "express";
 import sassMiddleware from "node-sass-middleware";
 import path from "path";
+import { createEngine } from "./createEngine";
 
 const expressApp = express();
 
 const PORT_NO = 3000;
 const SASS_SRC = path.join(__dirname, "../styles");  // In this case __dirname points ./src directory
 const SASS_DIST = path.join(__dirname, "../dist-styles");
+const IS_DEV = Object.keys(require.cache).some(path => path.includes('/ts-node/'));
+const VIEW_EXT = IS_DEV ? "tsx" : "js";
 
-expressApp.set("view engine", "pug");
-expressApp.set("views", "./templates");
+expressApp.set("view engine", VIEW_EXT);
+expressApp.set("views", IS_DEV ? "./src/templates" : "./templates");
+expressApp.engine(VIEW_EXT, createEngine());
 
 expressApp.use(sassMiddleware({
 	src: SASS_SRC,
-    dest: SASS_DIST,
-    // debug: true,
+	dest: SASS_DIST,
+	// debug: true,
 	outputStyle: 'compressed',
 	prefix: "/static"
 })/*, express.static(path.join(__dirname, "dist-styles"))*/);
 expressApp.use(express.static(SASS_DIST));
 
-// Add routing here when you write a new pug file
-expressApp.get("", (_req, res)=>{
-	res.render("index");
+// Add routing here when you write a new page file
+expressApp.get("", (_req, res) => {
+	res.render("top", { name: "World" });
 });
 
 expressApp.listen(PORT_NO);
