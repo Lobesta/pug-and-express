@@ -1,2 +1,2 @@
-# pug-and-express
-Simple Pug & Express.js project for lazy HTML beginners.
+# react-ized!
+Just put page templates in ./src/templates and add routing in index.ts.
