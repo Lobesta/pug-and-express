@@ -8,7 +8,7 @@ const expressApp = express();
 const PORT_NO = 3000;
 const SASS_SRC = path.join(__dirname, "../styles");  // In this case __dirname points ./src directory
 const SASS_DIST = path.join(__dirname, "../dist-styles");
-const IS_DEV = Object.keys(require.cache).some(path => path.includes('/ts-node/'));
+const IS_DEV = Object.keys(require.cache).some(path => path.includes('ts-node'));
 const VIEW_EXT = IS_DEV ? "tsx" : "js";
 
 expressApp.set("view engine", VIEW_EXT);
