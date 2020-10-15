@@ -1,5 +1,6 @@
 import express from "express";
 import sassMiddleware from "node-sass-middleware";
+import serveStatic from "serve-static"
 import path from "path";
 import { createEngine } from "./createEngine";
 
@@ -21,8 +22,8 @@ expressApp.use(sassMiddleware({
 	// debug: true,
 	outputStyle: 'compressed',
 	prefix: "/static"
-})/*, express.static(path.join(__dirname, "dist-styles"))*/);
-expressApp.use(express.static(SASS_DIST));
+}));
+expressApp.use("/static", serveStatic(SASS_DIST));
 
 // Add routing here when you write a new page file
 expressApp.get("", (_req, res) => {
