@@ -16,9 +16,10 @@ export const createEngine = ({ doctype = '<!doctype html>' }: EngineOptions = {}
 	return (path: string, options: object, callback: (e: any, rendered: string) => void): void => {
 		try {
 			const component = require(path).default as React.ComponentType<any>;
-			const pageMarkup = renderToStaticMarkup(component, options);
-			const markup = renderToStaticMarkup(Layout, {});
-			return callback(null, doctype + markup.replace("<div id=\"content\"></div>", pageMarkup)); // smarter ways are wanted
+			const markup = renderToStaticMarkup(Layout, {
+				content: React.createElement(component, options)
+			});
+			return callback(null, doctype + markup);
 		} catch (e) {
 			return callback(e, '');
 		}

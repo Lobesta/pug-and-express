@@ -1,6 +1,10 @@
 import React from "react";
 
-const Layout: React.FC = () => (
+type Content = {
+	content: React.DOMElement<any, any>
+}
+
+const Layout: React.FC<Content> = ({ content }) => (
 	<html>
 		<head>
 			<title> In Development! </title>
@@ -8,7 +12,9 @@ const Layout: React.FC = () => (
 			<link rel="stylesheet" href="static/global.css"/>
 		</head>
 		<body>
-			<div id="content"></div>
+			<div id="content">
+				{content}
+			</div>
 		</body>
 	</html>
 );
