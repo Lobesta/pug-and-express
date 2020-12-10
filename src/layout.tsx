@@ -1,8 +1,8 @@
 import React from "react";
 
 type Content = {
-	content: React.DOMElement<any, any>
-}
+	content: React.DOMElement<React.HTMLAttributes<Element>, Element>
+};
 
 const Layout: React.FC<Content> = ({ content }) => (
 	<html>
