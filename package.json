@@ -24,7 +24,7 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"node-sass-middleware": "^0.11.0",
 		"pug": "^3.0.0"
 	}
